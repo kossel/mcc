@@ -166,6 +166,7 @@ public class UserFormController extends BaseFormController {
         }
 
         if (!isFormSubmission(request)) {
+        	
             String userId = request.getParameter("id");
 
             // if user logged in with remember me, display a warning that they can't change passwords

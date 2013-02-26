@@ -5,7 +5,9 @@
     <meta name="menu" content="Login"/>
 </head>
 <body id="login">
-
+Tomcat Version : <%= application.getServerInfo() %><br>
+Servlet Specification Version : <%= application.getMajorVersion() %>.<%= application.getMinorVersion() %> <br>
+JSP version : <%= JspFactory.getDefaultFactory().getEngineInfo().getSpecificationVersion() %><br>
 <form method="post" id="loginForm" action="<c:url value='/j_security_check'/>"
     onsubmit="saveUsername(this);return validateForm(this)" class="form-signin" autocomplete="off">
     <h2 class="form-signin-heading">

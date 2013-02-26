@@ -65,6 +65,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private boolean accountExpired;
     private boolean accountLocked;
     private boolean credentialsExpired;
+    
 
     /**
      * Default constructor - creates a new instance with no values set.
