@@ -24,7 +24,7 @@
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
-        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload"
+        depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,DepartmentTests,PositionTests,PetTests"
         description="Call and executes all test cases (targets)"/>
     
     <!-- runs user-related tests -->
@@ -255,4 +255,301 @@
             </steps>
         </webtest>
     </target>
+    
+    
+    
+    
+    
+    
+    <!--Pet-START-->
+    <!-- runs pet-related tests -->
+    <target name="PetTests"
+            depends="SearchPets,EditPet,SavePet,AddPet,DeletePet"
+            description="Call and executes all pet test cases (targets)">
+        <echo>Successfully ran all Pet UI tests!</echo>
+    </target>
+
+    <!-- Verify the pets list screen displays without errors -->
+    <target name="SearchPets" description="Tests search for and displaying all pets">
+        <webtest name="searchPets">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View Pet link" url="/pets"/>
+                <verifytitle description="we should see the petList title"
+                    text=".*${petList.title}.*" regex="true"/>
+                <setinputfield description="set search term" name="q" value="*"/>
+                <clickbutton label="${button.search}" description="Click Search"/>
+                <verifytitle description="we should see the petList title"
+                    text=".*${petList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Verify the edit pet screen displays without errors -->
+    <target name="EditPet" description="Tests editing an existing Pet's information">
+        <webtest name="editPet">
+            &config;
+            <steps>
+                &login;
+                <invoke description="View Pet List" url="/pets"/>
+                <clicklink label="-1" description="Click edit link"/>
+                <verifytitle description="we should see the petDetail title"
+                    text=".*${petDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Edit a pet and then save -->
+    <target name="SavePet" description="Tests editing and saving a pet">
+        <webtest name="savePet">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Pet link" url="/petform?id=-1"/>
+                <verifytitle description="we should see the petDetail title"
+                    text=".*${petDetail.title}.*" regex="true"/>
+
+                <!-- update some of the required fields -->
+
+                <clickbutton label="${button.save}" description="Click Save"/>
+                <verifytitle description="Page re-appears if save successful"
+                    text=".*${petDetail.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${pet.updated}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Add a new Pet -->
+    <target name="AddPet" description="Adds a new Pet">
+        <webtest name="addPet">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/petform"/>
+                <verifytitle description="we should see the petDetail title"
+                    text=".*${petDetail.title}.*" regex="true"/>
+
+                <!-- enter required fields -->
+
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+                <verifytitle description="Pet List appears if save successful"
+                    text=".*${petList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${pet.added}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Delete existing pet -->
+    <target name="DeletePet" description="Deletes existing Pet">
+        <webtest name="deletePet">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Pet link" url="/petform?id=-1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display Pet List" text=".*${petList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${pet.deleted}"/>
+            </steps>
+        </webtest>
+    </target>    <!--Pet-END-->
+    <!--Position-START-->
+    <!-- runs position-related tests -->
+    <target name="PositionTests"
+            depends="SearchPositions,EditPosition,SavePosition,AddPosition,DeletePosition"
+            description="Call and executes all position test cases (targets)">
+        <echo>Successfully ran all Position UI tests!</echo>
+    </target>
+
+    <!-- Verify the positions list screen displays without errors -->
+    <target name="SearchPositions" description="Tests search for and displaying all positions">
+        <webtest name="searchPositions">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View Position link" url="/positions"/>
+                <verifytitle description="we should see the positionList title"
+                    text=".*${positionList.title}.*" regex="true"/>
+                <setinputfield description="set search term" name="q" value="*"/>
+                <clickbutton label="${button.search}" description="Click Search"/>
+                <verifytitle description="we should see the positionList title"
+                    text=".*${positionList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Verify the edit position screen displays without errors -->
+    <target name="EditPosition" description="Tests editing an existing Position's information">
+        <webtest name="editPosition">
+            &config;
+            <steps>
+                &login;
+                <invoke description="View Position List" url="/positions"/>
+                <clicklink label="-1" description="Click edit link"/>
+                <verifytitle description="we should see the positionDetail title"
+                    text=".*${positionDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Edit a position and then save -->
+    <target name="SavePosition" description="Tests editing and saving a position">
+        <webtest name="savePosition">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Position link" url="/positionform?id=-1"/>
+                <verifytitle description="we should see the positionDetail title"
+                    text=".*${positionDetail.title}.*" regex="true"/>
+
+                <!-- update some of the required fields -->
+
+                <clickbutton label="${button.save}" description="Click Save"/>
+                <verifytitle description="Page re-appears if save successful"
+                    text=".*${positionDetail.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${position.updated}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Add a new Position -->
+    <target name="AddPosition" description="Adds a new Position">
+        <webtest name="addPosition">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/positionform"/>
+                <verifytitle description="we should see the positionDetail title"
+                    text=".*${positionDetail.title}.*" regex="true"/>
+
+                <!-- enter required fields -->
+
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+                <verifytitle description="Position List appears if save successful"
+                    text=".*${positionList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${position.added}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Delete existing position -->
+    <target name="DeletePosition" description="Deletes existing Position">
+        <webtest name="deletePosition">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Position link" url="/positionform?id=-1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display Position List" text=".*${positionList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${position.deleted}"/>
+            </steps>
+        </webtest>
+    </target>    <!--Position-END-->
+    <!--Department-START-->
+    <!-- runs department-related tests -->
+    <target name="DepartmentTests"
+            depends="SearchDepartments,EditDepartment,SaveDepartment,AddDepartment,DeleteDepartment"
+            description="Call and executes all department test cases (targets)">
+        <echo>Successfully ran all Department UI tests!</echo>
+    </target>
+
+    <!-- Verify the departments list screen displays without errors -->
+    <target name="SearchDepartments" description="Tests search for and displaying all departments">
+        <webtest name="searchDepartments">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View Department link" url="/departments"/>
+                <verifytitle description="we should see the departmentList title"
+                    text=".*${departmentList.title}.*" regex="true"/>
+                <setinputfield description="set search term" name="q" value="*"/>
+                <clickbutton label="${button.search}" description="Click Search"/>
+                <verifytitle description="we should see the departmentList title"
+                    text=".*${departmentList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Verify the edit department screen displays without errors -->
+    <target name="EditDepartment" description="Tests editing an existing Department's information">
+        <webtest name="editDepartment">
+            &config;
+            <steps>
+                &login;
+                <invoke description="View Department List" url="/departments"/>
+                <clicklink label="-1" description="Click edit link"/>
+                <verifytitle description="we should see the departmentDetail title"
+                    text=".*${departmentDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Edit a department and then save -->
+    <target name="SaveDepartment" description="Tests editing and saving a department">
+        <webtest name="saveDepartment">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Department link" url="/departmentform?id=-1"/>
+                <verifytitle description="we should see the departmentDetail title"
+                    text=".*${departmentDetail.title}.*" regex="true"/>
+
+                <!-- update some of the required fields -->
+
+                <clickbutton label="${button.save}" description="Click Save"/>
+                <verifytitle description="Page re-appears if save successful"
+                    text=".*${departmentDetail.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${department.updated}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Add a new Department -->
+    <target name="AddDepartment" description="Adds a new Department">
+        <webtest name="addDepartment">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/departmentform"/>
+                <verifytitle description="we should see the departmentDetail title"
+                    text=".*${departmentDetail.title}.*" regex="true"/>
+
+                <!-- enter required fields -->
+
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+                <verifytitle description="Department List appears if save successful"
+                    text=".*${departmentList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${department.added}"/>
+            </steps>
+        </webtest>
+    </target>
+
+    <!-- Delete existing department -->
+    <target name="DeleteDepartment" description="Deletes existing Department">
+        <webtest name="deleteDepartment">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Department link" url="/departmentform?id=-1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display Department List" text=".*${departmentList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${department.deleted}"/>
+            </steps>
+        </webtest>
+    </target>    <!--Department-END-->
 </project>
+
+
+
+
+
+
+
+
+

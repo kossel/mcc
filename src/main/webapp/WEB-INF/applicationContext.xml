@@ -22,5 +22,17 @@
 	<!-- <bean id="personManager" class="com.kossel.service.impl.GenericManagerImpl">     
     	<constructor-arg ref="personDao"/> 
 	</bean> -->
+    <!--PetManager-START-->
+    <!-- <bean id="petManager" class="com.kossel.service.impl.GenericManagerImpl">
+        <constructor-arg>
+            <bean class="com.kossel.dao.hibernate.GenericDaoHibernate">
+                <constructor-arg value="com.kossel.model.Pet"/>
+            </bean>
+        </constructor-arg>
+    </bean> -->
+    <!--PetManager-END-->
+
+    
+
     <!-- Add new Managers here -->
 </beans>

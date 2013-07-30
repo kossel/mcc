@@ -1,13 +1,11 @@
 package com.kossel.webapp.controller;
 
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang.StringUtils;
-import com.kossel.Constants;
-import com.kossel.model.Role;
-import com.kossel.model.User;
-import com.kossel.service.RoleManager;
-import com.kossel.service.UserExistsException;
-import com.kossel.service.UserManager;
-import com.kossel.webapp.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.security.access.AccessDeniedException;
@@ -22,9 +20,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Locale;
+import com.kossel.Constants;
+import com.kossel.model.Role;
+import com.kossel.model.User;
+import com.kossel.service.RoleManager;
+import com.kossel.service.UserExistsException;
+import com.kossel.service.UserManager;
+import com.kossel.webapp.util.RequestUtil;
 
 /**
  * Implementation of <strong>SimpleFormController</strong> that interacts with

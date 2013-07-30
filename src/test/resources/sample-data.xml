@@ -90,15 +90,133 @@
             <value description="role_id">-1</value>
         </row>
     </table>
-    
+     <!--Position-START-->
+    <table name="Position">
+        <column>id</column>
+        <column>name_ch</column>
+        <column>name_es</column>
+    <row>
+        <value description="id">-1</value>
+        <value description="name_ch">经理</value>
+        <value description="name_es">Gerente</value>
+    </row>
+    <row>
+        <value description="id">-2</value>
+        <value description="name_ch">主管</value>
+        <value description="name_es">supervisor</value>
+    </row>
+    <row>
+        <value description="id">-3</value>
+        <value description="name_ch">前台</value>
+        <value description="name_es">recepcion</value>
+    </row>
+    </table>
+    <!--Position-END-->
+    <!--Department-START-->
+    <table name="Department">
+        <column>id</column>
+        <column>name_ch</column>
+        <column>name_es</column>
+    <row>
+        <value description="id">-1</value>
+        <value description="name_ch">财务</value>
+        <value description="name_es">finanza</value>
+    </row>
+    <row>
+        <value description="id">-2</value>
+        <value description="name_ch">模块</value>
+        <value description="name_es">modular</value>
+    </row>
+    <row>
+        <value description="id">-3</value>
+        <value description="name_ch">行政</value>
+        <value description="name_es">administracion</value>
+    </row>
+    </table>
+    <!--Department-END-->
 	<table name='person'>
-	  <column>id</column>
-	  <column>first_name</column>
-	  <column>last_name</column>
-		  <row>
-		    <value>1</value>
-		    <value>Matt</value>
-		    <value>Raible</value>
-		  </row>
+	<column>id</column>
+	<column>first_name</column>
+	<column>last_name</column>
+	<column>email</column>
+	<column>skype</column>
+	<column>ext</column>
+	<column>position_id</column>
+	<column>department_id</column>
+	<row>
+		<value>-1</value>
+		<value>Matt</value>
+		<value>Raible</value>
+		<value>kossel@cosl.mx</value>
+		<value>yichao</value>
+		<value>627</value>
+		<value>-1</value>
+		<value>-1</value>
+	</row>
+	<row>
+		<value>-2</value>
+		<value>Bob</value>
+		<value>Johnson</value>
+		<value>kossel@cosl.mx</value>
+		<value>yichao</value>
+		<value>627</value>
+		<value>-1</value>
+		<value>-1</value>
+	</row>
+	<row>
+		<value>-3</value>
+		<value>Bob2</value>
+		<value>Johns2on</value>
+		<value>kossel@cosl.mx</value>
+		<value>yichao</value>
+		<value>627</value>
+		<value>-1</value>
+		<value>-1</value>
+	</row>
 	  </table>
+    
+    
+    
+    
+    
+    
+    <!--Pet-START-->
+    <table name="Pet">
+        <column>id</column>
+        <column>age</column>
+        <column>name</column>
+        <column>person_id</column>
+        <column>type</column>
+    <row>
+        <value description="id">-1</value>
+        <value description="age">1812870283</value>
+        <value description="name">TuRrQbRlLbFtSdGzMmFvFgLgChDeFpUwSdMoHlSqXsLfAzMiRuIcBxJrKnJbKyHoEgOeNgXfIdFgXbZnBqMvRjMrGeDmLmKdXyDl</value>
+        <value description="person_id">-1</value>
+        <value description="type">ZpLjPpBkSoNzWzVaHhEaMpLgLkDrAfPrAnKvQqLlWxFvNaQjXfFrGwVkQgXlStKuBkYrSfBaHwOcQpMqCzFkWsOgIdVuOrOxIkQzLbYtEkCzJhRlQgWvLdHjMuFwBnDzBgBvNeMqFdZnBmDyUoWlJbSgFbLhEnIyKiTtIoApRxWjDqEdQlXeKfTzYtDdKaFzGwJeClGgEqGaAyWfRuWxNjRbImFdYlKySpYhCpNcIkUdNkNcTnLoRvTsBwTeGyO</value>
+    </row>
+    <row>
+        <value description="id">-2</value>
+        <value description="age">244351222</value>
+        <value description="name">HkRzFrNtWwCcQrGoApTdCyDiZdQePbEjAlRgSgEpYrPwZnEbNyLgOgPfQtRtExRiAlEsEwWmTnWfHrNmQcAsDoElAhZuGaYvEdZk</value>
+        <value description="person_id">-2</value>
+        <value description="type">WfVaDcWzLhClBtCnWjMdGxJtOkTvFcXuJuSrXmWqInCkVrMyLpNvZpLkDuOjWvVbAsSpXvDhImZtSwXbVpVhSaJxFaXtKzUvIsNdSaKsUgSeZzMjSdQlOjKaKyKeLwHsYpVhKxErBkJgZzDrSaOoDrMkIhRlTgBnJpArRpKpHkRoOzIiBtFpRhWrBaXzRmUmPjBjZbLjCwDmFnCqPlLcOpIdGtDeOqMwIaPpHaJoSdFxUyImWxKcZwNdKqPsNdP</value>
+    </row>
+    <row>
+        <value description="id">-3</value>
+        <value description="age">1537900390</value>
+        <value description="name">ZhOxRzGrLgSqIxGiKgHeUpKmEdFpJmUxMhPjPnYuBbSnInGhOoAbUaEfFoOxZiVmUgCiCdZlToIhViTsIrHjDrIrZfYhOsSdEnKb</value>
+        <value description="person_id">-3</value>
+        <value description="type">HrXsEoBhHtQqLpWkXlZnEoShStZcHyEzHyNoUlGwHxNxXrEmFxKmYwWhDcLbTmZxEnToNnWhVeWgMnBgFnUvWrYiBhAqAwKpJtLpLeGaKsQsRxTqSpNpReDqOwWuFuYtDlSbApTaYrSjXuHoRfHrObOuOaUpQgTxLyHeJrSkMwMeXyXgHjTiRlYwNfVlByAuYmGrVcQiJsLeHoAqZkJxVdLeYiFfRgZzIvXpWsXcNkGzMfBeDyMxJdTqSxKvBfD</value>
+    </row>
+    </table>
+    <!--Pet-END-->
+   
 </dataset>
+
+
+ 
+
+
+
+
+

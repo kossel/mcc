@@ -57,5 +57,32 @@
                 <arg key="user.passwordHint"/>
             </field>
         </form>
+        
+		<form name="person">
+		    <field property="firstName" depends="required">
+		        <arg key="person.firstName"/>
+		    </field>
+		    <field property="lastName" depends="required">
+		        <arg key="person.lastName"/>
+		    </field>
+		</form>
+        
+        
+        
+        
+        
+        
+        <!--Pet-START-->
+        <form name="pet">
+        </form>
+        <!--Pet-END-->
+        <!--Position-START-->
+        <form name="position">
+        </form>
+        <!--Position-END-->
+        <!--Department-START-->
+        <form name="department">
+        </form>
+        <!--Department-END-->
     </formset>
 </form-validation>

@@ -5,9 +5,22 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
-        <mapping class="com.kossel.model.User"/>
-        <mapping class="com.kossel.model.Role"/>
-        <mapping class="com.kossel.model.Person"/>
+	<session-factory>
+<!-- 		<property name="show_sql">true</property> -->
+<!-- 		<property name="format_sql">true</property> -->
+<!-- 		<property name="use_sql_comments">true</property> -->
+		<mapping class="com.kossel.model.User" />
+		<mapping class="com.kossel.model.Role" />
+		<mapping class="com.kossel.model.Person" />
+
+
+		<mapping class="com.kossel.model.Product" />
+		<mapping class="com.kossel.model.Car" />
+		<mapping class="com.kossel.model.Pet" />
+
+	    <mapping class="com.kossel.model.Department"/>
+        <mapping class="com.kossel.model.Position"/>
     </session-factory>
+
+
 </hibernate-configuration>

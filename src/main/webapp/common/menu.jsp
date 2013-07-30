@@ -10,8 +10,22 @@
     </c:if>
     <menu:displayMenu name="MainMenu"/>
     <menu:displayMenu name="UserMenu"/>
+    <menu:displayMenu name="PersonMenu"/>
     <menu:displayMenu name="AdminMenu"/>
     <menu:displayMenu name="Logout"/>
+    
+    
+    
+    
+      <!--Pet-START-->
+    <menu:displayMenu name="PetMenu"/>
+    <!--Pet-END-->
+    <!--Position-START
+    <menu:displayMenu name="PositionMenu"/>
+    <!--Position-END-->
+    <!--Department-START
+    <menu:displayMenu name="DepartmentMenu"/>-->
+    <!--Department-END-->
 </ul>
 </div>
 </menu:useMenuDisplayer>

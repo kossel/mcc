@@ -5,12 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Person extends BaseObject {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	private String userName;
+	private String email;
+	private int ext;
+	private String skype;
+	private Position position;
+	private Department department;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) 
@@ -35,6 +42,48 @@ public class Person extends BaseObject {
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	@Column(name="user_name", length=50)	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	@Column(name="email", length=255)
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	@Column(name="ext")
+	public int getExt() {
+		return ext;
+	}
+	public void setExt(int ext) {
+		this.ext = ext;
+	}
+	@Column(name="skype", length=100)
+	public String getSkype() {
+		return skype;
+	}
+	public void setSkype(String skype) {
+		this.skype = skype;
+	}
+	@ManyToOne
+	public Position getPosition() {
+		return position;
+	}
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	@ManyToOne
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	@Override
 	public String toString() {

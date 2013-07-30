@@ -18,7 +18,9 @@
     <logger name="org.springframework.security">
         <level value="ERROR"/>
     </logger>
-
+<logger name="org.springframework.ldap">
+        <level value="ERROR"/>
+    </logger>
     <logger name="org.apache">
         <level value="WARN"/>
     </logger>
@@ -53,9 +55,13 @@
         <level value="WARN"/>
     </logger>
   
-    <!--logger name="org.hibernate.SQL">
+    <logger name="org.hibernate.SQL">
         <level value="DEBUG"/>
-    </logger-->
+    </logger>
+    
+<!--     <logger name="org.hibernate.type"> -->
+<!-- 	<level value="TRACE" /> -->
+<!-- </logger> -->
 
     <logger name="org.springframework">
         <level value="WARN"/>
