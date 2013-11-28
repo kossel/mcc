@@ -28,7 +28,7 @@
     <fmt:message key="departmentList.message"/>
 
     <div id="actions" class="form-actions">
-        <a href='<c:url value="/departmentform"/>' class="btn btn-primary">
+        <a href='<c:url value="/admin/departmentform"/>' class="btn btn-primary">
             <i class="icon-plus icon-white"></i> <fmt:message key="button.add"/></a>
         <a href='<c:url value="/mainMenu"/>' class="btn"><i class="icon-ok"></i> <fmt:message key="button.done"/></a>
     </div>
