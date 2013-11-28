@@ -1,4 +1,6 @@
 package com.kossel.model;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.ManyToOne;
 
 
 @Entity
+@Indexed
 public class Pet extends BaseObject {
 
 	private Long id;

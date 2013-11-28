@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
         locations = {"classpath:/applicationContext-resources.xml",
                 "classpath:/applicationContext-dao.xml",
                 "classpath:/applicationContext-service.xml",
-                "classpath*:/applicationContext.xml", // for modular archetypes
+               // "classpath*:/applicationContext.xml", // for modular archetypes
                 "/WEB-INF/applicationContext*.xml",
                 "/WEB-INF/dispatcher-servlet.xml"})
 public abstract class BaseControllerTestCase extends AbstractTransactionalJUnit4SpringContextTests {
@@ -27,6 +27,7 @@ public abstract class BaseControllerTestCase extends AbstractTransactionalJUnit4
         JavaMailSenderImpl mailSender = (JavaMailSenderImpl) applicationContext.getBean("mailSender");
         mailSender.setPort(getSmtpPort());
         mailSender.setHost("localhost");
+
     }
 
     protected int getSmtpPort() {

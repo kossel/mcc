@@ -1,5 +1,7 @@
 package com.kossel.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@Indexed
 public class Position extends BaseObject {
 	
 	private Long id;

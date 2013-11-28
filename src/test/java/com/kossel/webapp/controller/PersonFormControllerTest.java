@@ -24,7 +24,7 @@ public class PersonFormControllerTest extends BaseControllerTestCase{
     public void testEdit() throws Exception {
         log.debug("testing edit...");
         request = newGet("/personform");
-        request.addParameter("id", "1");
+        request.addParameter("id", "-1");
  
         person = form.showForm(request);
         assertNotNull(person);
@@ -33,7 +33,7 @@ public class PersonFormControllerTest extends BaseControllerTestCase{
     @Test
     public void testSave() throws Exception {
         request = newGet("/personform");
-        request.addParameter("id", "1");
+        request.addParameter("id", "-1");
  
         person = form.showForm(request);
         assertNotNull(person);
@@ -56,7 +56,7 @@ public class PersonFormControllerTest extends BaseControllerTestCase{
         request = newPost("/personform");
         request.addParameter("delete", "");
         person = new Person();
-        person.setId(2L);
+        person.setId(-2L);
  
         BindingResult errors = new DataBinder(person).getBindingResult();
         form.onSubmit(person, errors, request, new MockHttpServletResponse());

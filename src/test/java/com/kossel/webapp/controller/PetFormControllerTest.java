@@ -4,6 +4,7 @@ import com.kossel.webapp.controller.BaseControllerTestCase;
 import com.kossel.model.Pet;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,13 +21,14 @@ public class PetFormControllerTest extends BaseControllerTestCase {
     private Pet pet;
     private MockHttpServletRequest request;
 
+
     @Test
     public void testEdit() throws Exception {
         log.debug("testing edit...");
         request = newGet("/petform");
         request.addParameter("id", "-1");
-
-        pet = form.showForm(request);
+        ModelMap model= new ModelMap();
+        pet = form.showForm(request,model);
         assertNotNull(pet);
     }
 
@@ -34,13 +36,13 @@ public class PetFormControllerTest extends BaseControllerTestCase {
     public void testSave() throws Exception {
         request = newGet("/petform");
         request.addParameter("id", "-1");
-
-        pet = form.showForm(request);
+        ModelMap model= new ModelMap();
+        pet = form.showForm(request, model);
         assertNotNull(pet);
-
+        assertNotNull(pet.getPerson());
         request = newPost("/petform");
 
-        pet = form.showForm(request);
+        pet = form.showForm(request, new ModelMap());
         // update required fields
 
         BindingResult errors = new DataBinder(pet).getBindingResult();
