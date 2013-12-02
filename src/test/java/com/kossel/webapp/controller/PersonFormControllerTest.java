@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 
@@ -26,7 +27,7 @@ public class PersonFormControllerTest extends BaseControllerTestCase{
         request = newGet("/personform");
         request.addParameter("id", "-1");
  
-        person = form.showForm(request);
+        person = form.showForm(request, new ModelMap());
         assertNotNull(person);
     }
  
@@ -35,12 +36,12 @@ public class PersonFormControllerTest extends BaseControllerTestCase{
         request = newGet("/personform");
         request.addParameter("id", "-1");
  
-        person = form.showForm(request);
+        person = form.showForm(request, new ModelMap());
         assertNotNull(person);
  
         request = newPost("/personform");
  
-        person = form.showForm(request);
+        person = form.showForm(request, new ModelMap());
         // update required fields
         person.setFirstName("Homer");
         person.setLastName("Simpson");

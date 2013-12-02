@@ -1,11 +1,6 @@
 package com.kossel.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Person extends BaseObject {
@@ -13,8 +8,9 @@ public class Person extends BaseObject {
 	private String firstName;
 	private String lastName;
 	private String userName;
+    private String mobile;
 	private String email;
-	private int ext;
+	private String ext;
 	private String skype;
 	private Position position;
 	private Department department;
@@ -27,9 +23,22 @@ public class Person extends BaseObject {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 
-	@Column(name="first_name", length=50)
+    @Transient
+    public String getFullName(){
+        return this.getFirstName()+" "+this.getLastName();
+    }
+
+    @Column(name="mobile")
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    @Column(name="first_name", length=50)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -58,10 +67,10 @@ public class Person extends BaseObject {
 		this.email = email;
 	}
 	@Column(name="ext")
-	public int getExt() {
+	public String getExt() {
 		return ext;
 	}
-	public void setExt(int ext) {
+	public void setExt(String ext) {
 		this.ext = ext;
 	}
 	@Column(name="skype", length=100)

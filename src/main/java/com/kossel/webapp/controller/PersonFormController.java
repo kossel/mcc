@@ -5,10 +5,14 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kossel.service.DepartmentManager;
+import com.kossel.service.PersonManager;
+import com.kossel.service.PositionManager;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +25,23 @@ import com.kossel.service.GenericManager;
 @RequestMapping("/personform*")
 public class PersonFormController extends BaseFormController {
     private GenericManager<Person, Long> personManager = null;
- 
+    private PositionManager positionManager= null;
+    private DepartmentManager departmentManager= null;
+
     @Autowired
     public void setPersonManager(@Qualifier("personManager") GenericManager<Person, Long> personManager) {
         this.personManager = personManager;
     }
- 
+    @Autowired
+    public void setPositionManager(PositionManager positionManager) {
+        this.positionManager = positionManager;
+    }
+
+    @Autowired
+    public void setDepartmentManager(DepartmentManager departmentManager) {
+        this.departmentManager = departmentManager;
+    }
+
     public PersonFormController() {
         setCancelView("redirect:persons");
         setSuccessView("redirect:persons");
@@ -34,12 +49,15 @@ public class PersonFormController extends BaseFormController {
  
     @ModelAttribute
     @RequestMapping(method = RequestMethod.GET)
-    protected Person showForm(HttpServletRequest request)
+    protected Person showForm(HttpServletRequest request,ModelMap modelMap)
     throws Exception {
         String id = request.getParameter("id");
- 
+        modelMap.addAttribute("departmentlist",this.departmentManager.getAll());
+        modelMap.addAttribute("positionlist",this.positionManager.getAll());
         if (!StringUtils.isBlank(id)) {
-            return personManager.get(new Long(id));
+            Person person = personManager.get(new Long(id));
+
+            return person;
         }
  
         return new Person();

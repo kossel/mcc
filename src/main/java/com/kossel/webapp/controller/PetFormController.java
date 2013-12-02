@@ -47,7 +47,7 @@ public class PetFormController extends BaseFormController {
         modelMap.addAttribute("personlist",this.personManager.getAll());
         if (!StringUtils.isBlank(id)) {
         	Pet p = petManager.get(new Long(id));
-        	System.out.println(p.getPerson());
+        	//System.out.println(p.getPerson());
             return p;
         }
        // modelMap.addAttribute("personlist",this.personManager.getAll());

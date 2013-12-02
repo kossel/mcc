@@ -2,11 +2,7 @@ package com.kossel.model;
 
 import org.hibernate.search.annotations.Indexed;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Indexed
@@ -41,6 +37,11 @@ public class Department extends BaseObject {
 	public void setNameES(String nameES) {
 		this.nameES = nameES;
 	}
+
+    @Transient
+    public String getFullName(){
+        return this.getNameCH()+" | "+this.getNameCH();
+    }
 	@Override
 	public String toString() {
 		return "Position [id=" + id + ", nameCH=" + nameCH + ", nameES="

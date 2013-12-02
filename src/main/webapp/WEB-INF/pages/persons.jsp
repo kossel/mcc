@@ -8,25 +8,32 @@
 	<h2>
 		<fmt:message key='personList.heading' />
 	</h2>
+
+    <security:authorize ifAnyGranted="ROLE_ADMIN">
 	<div id="actions" class="form-actions">
 		<a class="btn btn-primary" href="<c:url value='/personform'/>"> <i
 			class="icon-plus icon-white"></i> <fmt:message key="button.add" /></a> <a
 			class="btn" href="<c:url value='/mainMenu'/>"> <i class="icon-ok"></i>
 			<fmt:message key="button.done" /></a>
 	</div>
+
+    </security:authorize>
+
+
 	<display:table name="personList"
 		class="table table-condensed table-striped table-hover" requestURI=""
-		id="personList" export="true" pagesize="25">
+		id="personList" export="true" pagesize="200">
 		<display:column property="id" sortable="true" href="personform"
 			media="html" paramId="id" paramProperty="id" titleKey="person.id" />
 		<display:column property="id" media="csv excel xml pdf" 
- 			titleKey="person.id" /> 
-		<display:column property="firstName" sortable="true"
-			titleKey="person.firstName" />
-		<display:column property="lastName" sortable="true"
-			titleKey="person.lastName" />
-			<display:column property="department.nameCH" sortable="true" titleKey="department"/>
-			<display:column property="position.nameCH" sortable="true" titleKey="position"/>
+ 			titleKey="person.id" />
+        <display:column property="department.fullName" sortable="true" titleKey="department.name"/>
+		<display:column property="fullName" sortable="true" titleKey="person.name" />
+		<display:column property="position.fullPosition" sortable="true" titleKey="position.name" />
+        <display:column property="mobile" sortable="true" titleKey="person.mobile"/>
+        <display:column property="email" sortable="true" titleKey="person.email"/>
+        <display:column property="ext" sortable="true"	titleKey="person.ext" />
+        <display:column property="skype" sortable="true"	titleKey="person.skype" />
 		<display:setProperty name="paging.banner.item_name">
 			<fmt:message key="personList.person" />
 		</display:setProperty>

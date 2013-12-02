@@ -4,22 +4,22 @@
         <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
     </Displayers>
     <Menus>
-        <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu" roles="ROLE_ADMIN,ROLE_USER"/>
-        <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform" roles="ROLE_ADMIN,ROLE_USER"/>
+        <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu" roles="ROLE_ADMIN"/>
+        <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform" roles="ROLE_ADMIN"/>
         <Menu name="PersonMenu" title="personList.title" page="/persons"/>
-        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" page="/admin/users">
-            <Item name="ViewUsers" title="menu.admin.users" page="/admin/users"/>
-            <Item name="ActiveUsers" title="mainMenu.activeUsers" page="/admin/activeUsers"/>
-            <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload"/>
-            <Item name="FileUpload" title="menu.selectFile" page="/fileupload"/>
+        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN,ROLE_USER" page="/admin/users">
+            <Item name="ViewUsers" title="menu.admin.users" page="/admin/users" roles="ROLE_ADMIN"/>
+            <Item name="ActiveUsers" title="mainMenu.activeUsers" page="/admin/activeUsers" roles="ROLE_ADMIN"/>
+            <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload" roles="ROLE_ADMIN"/>
+            <Item name="FileUpload" title="menu.selectFile" page="/fileupload" roles="ROLE_ADMIN"/>
              <!--Position-START-->
-	        <Item name="PositionMenu" title="positionList.title" page="/admin/positions" />
+	        <Item name="PositionMenu" title="positionList.title" page="/admin/positions" roles="ROLE_ADMIN,ROLE_USER"/>
 	        <!--Position-END-->
 	        <!--Department-START-->
-	        <Item name="DepartmentMenu" title="departmentList.title" page="/admin/departments" />
+	        <Item name="DepartmentMenu" title="departmentList.title" page="/admin/departments" roles="ROLE_ADMIN,ROLE_USER"/>
 	        <!--Department-END-->
         </Menu>
-        <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
+    <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
         
         
         
@@ -27,7 +27,7 @@
         
         
         <!--Pet-START-->
-        <Menu name="PetMenu" title="petList.title" page="/pets"/>
+        <!--<Menu name="PetMenu" title="petList.title" page="/pets"/>-->
         <!--Pet-END-->
        
     </Menus> 

@@ -16,27 +16,80 @@
 	<form:errors path="*" cssClass="alert alert-error fade in" element="div"/>
 	<form:form commandName="person" method="post" action="personform" id="personForm" cssClass="well form-horizontal" onsubmit="return validatePerson(this)">
 		<form:hidden path="id" />
-		<div class="control-group">
-		<spring:bind path="person.firstName">
-		    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
-		 </spring:bind>
-			<appfuse:label styleClass="control-label" key="person.firstName" />
-			<div class="controls">
-				<form:input path="firstName" id="firstName" maxlength="50" />
-				<form:errors path="firstName" cssClass="help-inline" />
-			</div>
+
+
+            <spring:bind path="person.firstName">
+         <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+             </spring:bind>
+                <appfuse:label styleClass="control-label" key="person.firstName" />
+                <div class="controls">
+                    <form:input path="firstName" id="firstName" maxlength="50" />
+                    <form:errors path="firstName" cssClass="help-inline" />
+                </div>
 		</div>
+
+
 		<spring:bind path="person.lastName">
-    <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
-    </spring:bind>
-		<div class="control-group">
-			<appfuse:label key="person.lastName" styleClass="control-label"/>
-			<div class="controls">
-				<form:input path="lastName" id="lastName" maxlength="50"/>
-				<form:errors path="lastName" cssClass="help-inline"/>
-			</div>
+        <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+            </spring:bind>
+
+                <appfuse:label key="person.lastName" styleClass="control-label"/>
+                <div class="controls">
+                    <form:input path="lastName" id="lastName" maxlength="50"/>
+                    <form:errors path="lastName" cssClass="help-inline"/>
+                </div>
 		</div>
-		<div class="form-actions">
+
+        <spring:bind path="person.mobile">
+            <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+        </spring:bind>
+
+        <appfuse:label key="person.mobile" styleClass="control-label"/>
+        <div class="controls">
+            <form:input path="mobile" id="mobile" maxlength="50"/>
+            <form:errors path="mobile" cssClass="help-inline"/>
+        </div>
+        </div>
+
+
+        <spring:bind path="person.email">
+        <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+            </spring:bind>
+
+            <appfuse:label key="person.email" styleClass="control-label"/>
+            <div class="controls">
+                <form:input path="email" id="email" maxlength="50"/>
+                <form:errors path="email" cssClass="help-inline"/>
+            </div>
+        </div>
+
+
+        <spring:bind path="person.ext">
+        <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+            </spring:bind>
+
+            <appfuse:label key="person.ext" styleClass="control-label"/>
+            <div class="controls">
+                <form:input path="ext" id="lastName" maxlength="50"/>
+                <form:errors path="ext" cssClass="help-inline"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <appfuse:label key="department.name" styleClass="control-label"/>
+            <div class="controls">
+                <form:select path="department.id" items="${departmentlist}" itemLabel="nameES" itemValue="id"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <appfuse:label key="position.name" styleClass="control-label"/>
+            <div class="controls">
+                <form:select path="position.id" items="${positionlist}" itemLabel="nameES" itemValue="id"/>
+            </div>
+        </div>
+
+        <div class="form-actions">
 			<button type="submit" class="btn btn-primary" name="save" onclick="bCancel=false">
 			<i class="icon-ok icon-white"></i> <fmt:message key="button.save"/>
 			</button>
@@ -49,8 +102,10 @@
 					<i class="icon-remove"></i><fmt:message key="button.cancel" />
 			</button>
 		</div>
+
 	</form:form>
 </div>
+
 <v:javascript formName="person" cdata="false" dynamicJavascript="true" staticJavascript="false"/>
 <script type="text/javascript" src="<c:url value='/scripts/validator.jsp'/>"></script>
 
