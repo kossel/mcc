@@ -4,7 +4,7 @@
 <title><fmt:message key="personList.title" /></title>
 <meta name="menu" content="PersonMenu" />
 </head>
-<div class="span10">
+<div class="span12">
 	<h2>
 		<fmt:message key='personList.heading' />
 	</h2>
@@ -23,8 +23,13 @@
 	<display:table name="personList"
 		class="table table-condensed table-striped table-hover" requestURI=""
 		id="personList" export="true" pagesize="200">
-		<display:column property="id" sortable="true" href="personform"
+        <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
+        <display:column property="id" sortable="true" href="personform"
 			media="html" paramId="id" paramProperty="id" titleKey="person.id" />
+        </security:authorize>
+        <security:authorize ifAnyGranted="ROLE_ANONYMOUS">
+        <display:column property="id" sortable="true" titleKey="person.id"/>
+        </security:authorize>
 		<display:column property="id" media="csv excel xml pdf" 
  			titleKey="person.id" />
         <display:column property="department.fullName" sortable="true" titleKey="department.name"/>
