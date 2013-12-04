@@ -1,4 +1,5 @@
 
+
 // This function is used by the login screen to validate user/pass
 // are entered.
 function validateRequired(form) {

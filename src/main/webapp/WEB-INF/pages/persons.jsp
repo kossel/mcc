@@ -3,17 +3,21 @@
 <head>
 <title><fmt:message key="personList.title" /></title>
 <meta name="menu" content="PersonMenu" />
+    <style>
+
+        td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
+    </style>
 </head>
 <div class="span12">
 	<h2>
 		<fmt:message key='personList.heading' />
 	</h2>
 
-    <security:authorize ifAnyGranted="ROLE_ADMIN">
+    <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
 	<div id="actions" class="form-actions">
 		<a class="btn btn-primary" href="<c:url value='/personform'/>"> <i
 			class="icon-plus icon-white"></i> <fmt:message key="button.add" /></a> <a
-			class="btn" href="<c:url value='/mainMenu'/>"> <i class="icon-ok"></i>
+			class="btn" href="<c:url value='/persons'/>"> <i class="icon-ok"></i>
 			<fmt:message key="button.done" /></a>
 	</div>
 
@@ -21,7 +25,7 @@
 
 
 	<display:table name="personList"
-		class="table table-condensed table-striped table-hover" requestURI=""
+		class="table table-condensed table-striped table-hover personListtt" requestURI=""
 		id="personList" export="true" pagesize="200">
         <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
         <display:column property="id" sortable="true" href="personform"
@@ -52,4 +56,19 @@
 		<display:setProperty name="export.pdf.filename">
 			<fmt:message key="personList.title" />.pdf</display:setProperty>
 	</display:table>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var stripeTable = function(table) {
+                table.find('tr').removeClass('tr:nth-child(odd)').filter(':visible:even').addClass('tr:nth-child(odd)');
+           };
+          $('#personList').filterTable({
+                callback: function(term, table) { stripeTable(table); }
+            });
+            $('#personList').filterTable();
+
+            $('input[type=search]').focus();
+        });
+    </script>
 </div>

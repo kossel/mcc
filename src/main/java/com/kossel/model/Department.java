@@ -40,7 +40,7 @@ public class Department extends BaseObject {
 
     @Transient
     public String getFullName(){
-        return this.getNameCH()+" | "+this.getNameCH();
+        return this.getNameCH()+" "+this.getNameES();
     }
 	@Override
 	public String toString() {

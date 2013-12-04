@@ -62,9 +62,7 @@
 		    <field property="firstName" depends="required">
 		        <arg key="person.firstName"/>
 		    </field>
-		    <field property="lastName" depends="required">
-		        <arg key="person.lastName"/>
-		    </field>
+
 		</form>
         
         

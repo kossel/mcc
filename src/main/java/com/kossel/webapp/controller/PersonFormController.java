@@ -94,7 +94,10 @@ public class PersonFormController extends BaseFormController {
             saveMessage(request, getText(key, locale));
  
             if (!isNew) {
-                success = "redirect:personform?id=" + person.getId();
+                //success = "redirect:personform?id=" + person.getId();
+                success = "redirect:persons";
+            }else{
+                success = "redirect:personform";
             }
         }
  

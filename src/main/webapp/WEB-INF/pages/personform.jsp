@@ -63,6 +63,18 @@
             </div>
         </div>
 
+        <spring:bind path="person.skype">
+            <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+        </spring:bind>
+
+        <appfuse:label key="person.skype" styleClass="control-label"/>
+        <div class="controls">
+            <form:input path="skype" id="skpye" maxlength="50"/>
+            <form:errors path="skype" cssClass="help-inline"/>
+        </div>
+        </div>
+
+
 
         <spring:bind path="person.ext">
         <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
