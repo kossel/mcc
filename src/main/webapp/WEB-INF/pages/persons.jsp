@@ -4,7 +4,7 @@
 <title><fmt:message key="personList.title" /></title>
 <meta name="menu" content="PersonMenu" />
     <style>
-
+        tr.striped { background-color: #f5f5f5; }
         td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
     </style>
 </head>
@@ -25,14 +25,14 @@
 
 
 	<display:table name="personList"
-		class="table table-condensed table-striped table-hover personListtt" requestURI=""
+		class="table table-condensed table-hover" requestURI=""
 		id="personList" export="true" pagesize="200">
         <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
-        <display:column property="id" sortable="true" href="personform"
+            <display:column property="id" sortable="true" href="personform"
 			media="html" paramId="id" paramProperty="id" titleKey="person.id" />
         </security:authorize>
         <security:authorize ifAnyGranted="ROLE_ANONYMOUS">
-        <display:column property="id" sortable="true" titleKey="person.id"/>
+             <display:column property="id" sortable="true" titleKey="person.id"/>
         </security:authorize>
 		<display:column property="id" media="csv excel xml pdf" 
  			titleKey="person.id" />
@@ -53,7 +53,7 @@
 			<fmt:message key="personList.title" />.xls</display:setProperty>
 		<display:setProperty name="export.csv.filename">
 			<fmt:message key="personList.title" />.csv</display:setProperty>
-		<display:setProperty name="export.pdf.filename">
+		<display:setProperty name="export.pdf.filename" >
 			<fmt:message key="personList.title" />.pdf</display:setProperty>
 	</display:table>
 
@@ -61,7 +61,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var stripeTable = function(table) {
-                table.find('tr').removeClass('tr:nth-child(odd)').filter(':visible:even').addClass('tr:nth-child(odd)');
+                table.find('tr').removeClass('striped').filter(':visible:even').addClass('striped');
            };
           $('#personList').filterTable({
                 callback: function(term, table) { stripeTable(table); }
@@ -69,6 +69,7 @@
             $('#personList').filterTable();
 
             $('input[type=search]').focus();
+            $('#personList').find('tr').filter(':visible:even').addClass('striped');
         });
     </script>
 </div>
