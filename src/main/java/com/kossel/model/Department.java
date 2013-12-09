@@ -12,6 +12,7 @@ public class Department extends BaseObject {
 	private Long id;
 	private String nameCH;
 	private String nameES;
+    private Integer ord;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -37,6 +38,15 @@ public class Department extends BaseObject {
 	public void setNameES(String nameES) {
 		this.nameES = nameES;
 	}
+
+    @Column(name="ord")
+    public Integer getOrd() {
+        return ord;
+    }
+
+    public void setOrd(Integer order) {
+        this.ord = order;
+    }
 
     @Transient
     public String getFullName(){

@@ -1,5 +1,6 @@
 package com.kossel.webapp.controller;
 
+import com.kossel.service.PersonManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,15 @@ import com.kossel.service.GenericManager;
 @Controller
 @RequestMapping("/persons*")
 public class PersonController {
-	private GenericManager<Person, Long> personManager;
+	private PersonManager personManager;
 	
 	@Autowired
-	public void setPersonManager(@Qualifier("personManager")GenericManager<Person, Long> personManager){
+	public void setPersonManager(@Qualifier("personManager")PersonManager personManager){
 		this.personManager=personManager;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView handleRequest() throws Exception{
-		return new ModelAndView().addObject(personManager.getAll());
+		return new ModelAndView().addObject(personManager.getByDept());
 	}
 }

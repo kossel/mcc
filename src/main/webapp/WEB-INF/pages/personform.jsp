@@ -82,7 +82,7 @@
 
             <appfuse:label key="person.ext" styleClass="control-label"/>
             <div class="controls">
-                <form:input path="ext" id="lastName" maxlength="50"/>
+                <form:input path="ext" id="ext" maxlength="50"/>
                 <form:errors path="ext" cssClass="help-inline"/>
             </div>
         </div>
@@ -100,6 +100,18 @@
                 <form:select path="position.id" items="${positionlist}" itemLabel="nameES" itemValue="id"/>
             </div>
         </div>
+
+        <spring:bind path="person.ord">
+            <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+        </spring:bind>
+
+        <appfuse:label key="person.ord" styleClass="control-label"/>
+        <div class="controls">
+            <form:input path="ord" id="ord" maxlength="50" />
+            <form:errors path="ord" cssClass="help-inline"/>
+        </div>
+        </div>
+
 
         <div class="form-actions">
 			<button type="submit" class="btn btn-primary" name="save" onclick="bCancel=false">

@@ -15,7 +15,6 @@
 
 
 		<mapping class="com.kossel.model.Product" />
-		<mapping class="com.kossel.model.Car" />
 		<mapping class="com.kossel.model.Pet" />
 
 	    <mapping class="com.kossel.model.Department"/>

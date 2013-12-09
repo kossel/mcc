@@ -39,6 +39,16 @@
         </div>
     </div>
 
+    <spring:bind path="department.ord">
+        <div class="control-group${(not empty status.errorMessage) ? ' error' : ''}">
+    </spring:bind>
+    <appfuse:label key="department.ord" styleClass="control-label"/>
+    <div class="controls">
+        <form:input path="ord" id="ord"  maxlength="150"/>
+        <form:errors path="ord" cssClass="help-inline"/>
+    </div>
+    </div>
+
     <div class="form-actions">
         <button type="submit" class="btn btn-primary" name="save" onclick="bCancel=false">
             <i class="icon-ok icon-white"></i> <fmt:message key="button.save"/>

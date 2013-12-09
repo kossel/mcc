@@ -12,6 +12,7 @@ public class Person extends BaseObject {
 	private String email;
 	private String ext;
 	private String skype;
+    private Integer ord =9999;
 	private Position position;
 	private Department department;
 	
@@ -80,7 +81,20 @@ public class Person extends BaseObject {
 	public void setSkype(String skype) {
 		this.skype = skype;
 	}
-	@ManyToOne
+    @Column(name="ord")
+    public Integer getOrd() {
+        return ord;
+    }
+
+    public void setOrd(Integer order) {
+        if(order!=null){
+            this.ord =order;
+        }else{
+            this.ord = 9999;
+        }
+    }
+
+    @ManyToOne
 	public Position getPosition() {
 		return position;
 	}

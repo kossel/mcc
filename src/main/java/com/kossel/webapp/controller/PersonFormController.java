@@ -92,7 +92,6 @@ public class PersonFormController extends BaseFormController {
             personManager.save(person);
             String key = (isNew) ? "person.added" : "person.updated";
             saveMessage(request, getText(key, locale));
- 
             if (!isNew) {
                 //success = "redirect:personform?id=" + person.getId();
                 success = "redirect:persons";

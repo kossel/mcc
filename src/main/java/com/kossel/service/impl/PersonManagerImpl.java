@@ -23,4 +23,8 @@ public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implemen
     public List<Person> findByLastName(String lastName) {
         return personDao.findByLastName(lastName);
     }
+
+    public List<Person> getByDept(){
+        return personDao.getByDept();
+    }
 }
