@@ -12,7 +12,7 @@
     </div>
 </c:if>
 
-<div class="span10">
+<div class="span12">
     <h2><fmt:message key="departmentList.heading"/></h2>
 
     <form method="get" action="${ctx}/departments" id="searchForm" class="form-search">

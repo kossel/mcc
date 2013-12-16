@@ -9,7 +9,10 @@ import javax.servlet.jsp.JspException;
 import java.io.OutputStream;
 
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.commons.lang.ObjectUtils;
@@ -139,6 +142,8 @@ public class ContactPDFView implements BinaryExportView {
             document.addCreationDate();
 
             HeaderFooter footer = new HeaderFooter(new Phrase(TagConstants.EMPTY_STRING, smallFont), true);
+
+
             footer.setBorder(Rectangle.NO_BORDER);
             footer.setAlignment(Element.ALIGN_CENTER);
             PdfWriter.getInstance(document, out);
@@ -149,6 +154,11 @@ public class ContactPDFView implements BinaryExportView {
             document=this.generateTitle(document);
             document.setFooter(footer);
             document.add(this.tablePDF);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            Paragraph genDate = new Paragraph("Generates at: "+dateFormat.format(date),dirFont);
+            genDate.setAlignment(Element.ALIGN_RIGHT);
+            document.add(genDate);
             document.close();
 
         }
@@ -270,6 +280,7 @@ public class ContactPDFView implements BinaryExportView {
             }
             totalRowSpan=totalRowSpan-1;
         }
+
     }
 
 
@@ -318,9 +329,6 @@ public class ContactPDFView implements BinaryExportView {
 
                 rowNum++;
             }
-        }
-        for(int i=0; i<counts.size(); i++){
-            System.out.println(counts.get(i));
         }
         return counts;
     }

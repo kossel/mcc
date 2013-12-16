@@ -21,7 +21,7 @@
 	</div>
 
     </security:authorize>
-
+    <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
 	<display:table name="personList"
 		class="table table-condensed table-bordered table-hover" requestURI=""
 		id="personList" export="true" pagesize="200" >
@@ -53,6 +53,7 @@
 	</display:table>
 
 
+
     <script type="text/javascript">
         $(document).ready(function() {
 
@@ -63,7 +64,8 @@
 
                // first_instance holds the first instance of identical td
                 var first_instance = null;
-                // iterate through rows
+                // iterate
+                // through rows
                 $(this).find('tr').each(function () {
 
                     // find the td of the correct column (determined by the dimension_col set above)

@@ -4,6 +4,7 @@ import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,11 +15,14 @@ import java.sql.Timestamp;
  */
 @Entity
 @Indexed
+@Table(name="opt")
 public class Option {
 
     private Long id;
-    private Timestamp lastEditPersonsTime;
+
     private String whoLastEditPersons;
+    private Date lastEditPersonsTime;
+    private Integer changes;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,13 +33,14 @@ public class Option {
         this.id = id;
     }
 
-    @Column(name="last_edit_persons_time")
-    public Timestamp getLastEditPersonsTime() {
+   @Temporal( TemporalType.TIMESTAMP )
+   @Column(name="last_edit_persons_time")
+    public Date getLastEditPersonsTime() {
         return lastEditPersonsTime;
     }
 
-    public void setLastEditPersonsTime(Timestamp lastEditPersons) {
-        this.lastEditPersonsTime = lastEditPersons;
+    public void setLastEditPersonsTime(Date lastEditPersonsTime) {
+        this.lastEditPersonsTime = lastEditPersonsTime;
     }
 
     @Column(name="who_last_edit_persons")
@@ -45,6 +50,15 @@ public class Option {
 
     public void setWhoLastEditPersons(String whoLastEditPersons) {
         this.whoLastEditPersons = whoLastEditPersons;
+    }
+
+    @Column(name="changes")
+    public Integer getChanges() {
+        return changes;
+    }
+
+    public void setChanges(Integer changes) {
+        this.changes = changes;
     }
 
     @Override
@@ -63,11 +77,11 @@ public class Option {
         return true;
     }
 
-    @Override
+   /* @Override
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + (lastEditPersonsTime != null ? lastEditPersonsTime.hashCode() : 0);
         result = 31 * result + (whoLastEditPersons != null ? whoLastEditPersons.hashCode() : 0);
         return result;
-    }
+    }      */
 }

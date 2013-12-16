@@ -19,6 +19,7 @@
 
 	    <mapping class="com.kossel.model.Department"/>
         <mapping class="com.kossel.model.Position"/>
+        <mapping class="com.kossel.model.Option"/>
     </session-factory>
 
 

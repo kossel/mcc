@@ -12,7 +12,7 @@
     </div>
 </c:if>
 
-<div class="span10">
+<div class="span12">
     <h2><fmt:message key="positionList.heading"/></h2>
 
     <form method="get" action="${ctx}/positions" id="searchForm" class="form-search">

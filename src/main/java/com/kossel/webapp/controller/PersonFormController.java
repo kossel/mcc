@@ -5,9 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kossel.service.DepartmentManager;
-import com.kossel.service.PersonManager;
-import com.kossel.service.PositionManager;
+import com.kossel.service.*;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kossel.model.Person;
-import com.kossel.service.GenericManager;
 
 @Controller
 @RequestMapping("/personform*")
 public class PersonFormController extends BaseFormController {
-    private GenericManager<Person, Long> personManager = null;
+    private PersonManager personManager = null;
     private PositionManager positionManager= null;
     private DepartmentManager departmentManager= null;
 
+
     @Autowired
-    public void setPersonManager(@Qualifier("personManager") GenericManager<Person, Long> personManager) {
+    public void setPersonManager(@Qualifier("personManager") PersonManager personManager) {
         this.personManager = personManager;
     }
     @Autowired
@@ -89,7 +87,7 @@ public class PersonFormController extends BaseFormController {
             personManager.remove(person.getId());
             saveMessage(request, getText("person.deleted", locale));
         } else {
-            personManager.save(person);
+            personManager.save(request.getRemoteUser(),person);
             String key = (isNew) ? "person.added" : "person.updated";
             saveMessage(request, getText(key, locale));
             if (!isNew) {
@@ -98,6 +96,7 @@ public class PersonFormController extends BaseFormController {
             }else{
                 success = "redirect:personform";
             }
+
         }
  
         return success;
