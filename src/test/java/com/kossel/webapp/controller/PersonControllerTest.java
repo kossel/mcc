@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class PersonControllerTest extends BaseControllerTestCase{
 	
@@ -16,7 +19,7 @@ public class PersonControllerTest extends BaseControllerTestCase{
 	
 	@Test
 	public void testHandleRequest() throws Exception{
-		ModelAndView mav = controller.handleRequest();
+		ModelAndView mav = controller.handleRequest(new MockHttpServletRequest());
 		ModelMap m = mav.getModelMap();
 		
 		assertNotNull(m.get("personList"));

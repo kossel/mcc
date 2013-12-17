@@ -95,12 +95,12 @@ public class ContactPDFView implements BinaryExportView {
         tablePDF.setWidth(100);
         tablePDF.setPadding(2);
         tablePDF.setSpacing(0);
-        float[] columnWidths = new float[] {3f, 24f, 21f, 20f, 8f,12f,4f,8f};
+        float[] columnWidths = new float[] {3f, 22f, 20f, 20f, 9f,19f,4f,9f};
         tablePDF.setWidths(columnWidths);
        // smallFont = FontFactory.getFont(FontFactory.HELVETICA, 7, Font.NORMAL, new Color(0, 0, 0));
         dirFont= FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new Color(0, 0, 0));
         BaseFont bf = BaseFont.createFont("c:/windows/Fonts/msyh.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        smallFont = new Font(bf,7f);
+        smallFont = new Font(bf,8.5f);
     }
 
     /**
@@ -150,6 +150,8 @@ public class ContactPDFView implements BinaryExportView {
 
             // Fill the virtual PDF table with the necessary data
             generatePDFTable();
+            document.setPageSize(PageSize.LETTER.rotate());
+            document.setMargins(30,30,20,20);
             document.open();
             document=this.generateTitle(document);
             document.setFooter(footer);
@@ -169,6 +171,7 @@ public class ContactPDFView implements BinaryExportView {
     }
 
     protected Document generateTitle(Document doc) throws Exception {
+       // String relativeWebPath = "webapps/contacts/images/cosllogo_small.jpg";
         String relativeWebPath = "src/main/webapp/images/cosllogo_small.jpg";
 
         //String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
@@ -178,9 +181,6 @@ public class ContactPDFView implements BinaryExportView {
         logo.setAlignment(Image.ALIGN_LEFT);
         logo.scalePercent(50f);
 
-        Paragraph mailgroups = new Paragraph(12);
-        mailgroups.add(new Paragraph("Spanish Speaker: staffmx@cosl.mx", dirFont));
-        mailgroups.add(new Paragraph("Chinese Speaker: expats@cosl.mx", dirFont));
         Paragraph title = new Paragraph(12);
         addEmptyLine(title,1);
         title.setSpacingBefore(-15);
@@ -188,8 +188,10 @@ public class ContactPDFView implements BinaryExportView {
 
         title.add(new Paragraph("C.P. 24157, Cd. del Carmen, Campeche, México",dirFont));
         title.add(new Paragraph("Phone: +52 (938) 118 23 98  Fax:+52 (938) 131 4820",dirFont));
+        title.add(new Paragraph("Chinese Speaker: expats@cosl.mx     Spanish Speaker: staffmx@cosl.mx", dirFont));
         doc.add(logo);
         doc.add(title);
+
         return doc;
     }
 
@@ -218,10 +220,10 @@ public class ContactPDFView implements BinaryExportView {
                 columnHeader = StringUtils.capitalize(headerCell.getBeanPropertyName());
             }
             Cell hdrCell;
-            if(colNum==1){
+          //  if(colNum==1){
                 hdrCell = getCellCentered(columnHeader);
-            }
-            hdrCell = getCell(columnHeader);
+          //  }
+            //hdrCell = getCell(columnHeader);
             hdrCell.setGrayFill(0.9f);
             hdrCell.setHeader(true);
             tablePDF.addCell(hdrCell);
@@ -264,7 +266,10 @@ public class ContactPDFView implements BinaryExportView {
                     if(totalRowSpan<1){
                         totalRowSpan=counts.get(rowBlock-1);
                         rowBlock=rowBlock+1;
-                        cell = getCellCentered(currentText);
+                        System.out.println(currentText);
+                        String texts[]=currentText.split("<br/>");
+                        System.out.println(texts[0]);
+                        cell = getCellCentered(texts[0]+"\n"+texts[1]);
                         cell.setRowspan(totalRowSpan);
 
                         tablePDF.addCell(cell);
@@ -272,7 +277,11 @@ public class ContactPDFView implements BinaryExportView {
                     }
 
                 }else{
-                    cell = getCell(currentText);
+                    if(rowNum==0||rowNum==4||rowNum==5||rowNum==6){
+                        cell = getCellCentered(currentText);
+                    }else{
+                        cell = getCell(currentText);
+                    }
                     tablePDF.addCell(cell);
                 }
 
