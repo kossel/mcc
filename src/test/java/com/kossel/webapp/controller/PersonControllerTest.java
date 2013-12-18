@@ -10,6 +10,8 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class PersonControllerTest extends BaseControllerTestCase{
 	
 	@Autowired

@@ -19,13 +19,14 @@
 			class="btn" href="<c:url value='persons'/>"> <i class="icon-ok"></i>
 			<fmt:message key="button.done" /></a>
 	</div>
-
+        <fmt:message key='opt.staffmx' />   <a href="mailto:staffmx@cosl.mx" target="_top">staffmx@cosl.mx</a> <br/>
+        <fmt:message key='opt.expats' />   <a href="mailto:expats@cosl.mx" target="_top">expats@cosl.mx</a>
     </security:authorize>
-    <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
+    <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${opt.whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
 	<display:table name="personList"
 		class="table table-condensed table-bordered table-hover table-striped" requestURI=""
 		id="personList" export="true" pagesize="200" >
-        <display:column titleKey="person.id">
+        <display:column titleKey="person.id" class="centerCellText"  headerClass="centerCellText">
             <c:out value="${personList_rowNum}"/>
         </display:column>
         <display:column property="department.fullName"  titleKey="department.name" headerClass="centerCellText" />
@@ -37,9 +38,9 @@
             <display:column property="fullName" titleKey="person.name"/>
         </security:authorize>
 		<display:column property="position.fullPosition" titleKey="position.name" />
-        <display:column property="mobile"  titleKey="person.mobile"/>
+        <display:column property="mobile"  titleKey="person.mobile" class="centerCellText" headerClass="centerCellText"/>
         <display:column property="email"  titleKey="person.email"/>
-        <display:column property="ext" 	titleKey="person.ext" />
+        <display:column property="ext" 	titleKey="person.ext" class="centerCellText"  headerClass="centerCellText" />
         <display:column property="skype" titleKey="person.skype" />
 		<display:setProperty name="paging.banner.item_name">
 			<fmt:message key="personList.persons" />

@@ -3,6 +3,7 @@ package com.kossel.model;
 import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import java.util.Date;
 @Entity
 @Indexed
 @Table(name="opt")
-public class Option {
+public class Option implements Serializable {
 
     private Long id;
 
