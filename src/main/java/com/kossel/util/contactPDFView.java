@@ -1,14 +1,20 @@
 package com.kossel.util;
 
-import com.lowagie.text.*;
-import com.lowagie.text.pdf.BaseFont;
+import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.BaseFont;
+
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.displaytag.export.BinaryExportView;
 import org.displaytag.model.TableModel;
 
 import javax.servlet.jsp.JspException;
 import java.io.OutputStream;
 
-import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +33,6 @@ import org.displaytag.model.Row;
 import org.displaytag.model.RowIterator;
 import org.displaytag.util.TagConstants;
 
-import com.lowagie.text.pdf.PdfWriter;
 /**
  * Created with IntelliJ IDEA.
  * User: Yichao
@@ -61,7 +66,7 @@ public class ContactPDFView implements BinaryExportView {
      * This is the table, added as an Element to the PDF document. It contains all the data, needed to represent the
      * visible table into the PDF
      */
-    private Table tablePDF;
+    private PdfPTable tablePDF;
 
     /**
      * The default font used in the document.
@@ -89,18 +94,23 @@ public class ContactPDFView implements BinaryExportView {
      */
     protected void initTable() throws Exception
     {
-        tablePDF = new Table(this.model.getNumberOfColumns());
-        tablePDF.setDefaultVerticalAlignment(Element.ALIGN_TOP);
-        tablePDF.setCellsFitPage(true);
-        tablePDF.setWidth(100);
-        tablePDF.setPadding(2);
-        tablePDF.setSpacing(0);
-        float[] columnWidths = new float[] {3f, 24f, 21f, 20f, 8f,12f,4f,8f};
+        tablePDF = new PdfPTable(this.model.getNumberOfColumns());
+       // tablePDF.setDefaultVerticalAlignment(Element.ALIGN_TOP);
+        tablePDF.setHeaderRows(11);
+        tablePDF.setWidthPercentage(100);
+
+      //  tablePDF.setSpacing(0);
+        tablePDF.setSplitLate(false);
+        tablePDF.setSplitRows(true);
+        float[] columnWidths = new float[] {3f, 22f, 20f, 20f, 9f,19f,4f,9f};
         tablePDF.setWidths(columnWidths);
        // smallFont = FontFactory.getFont(FontFactory.HELVETICA, 7, Font.NORMAL, new Color(0, 0, 0));
-        dirFont= FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new Color(0, 0, 0));
+        dirFont= FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new BaseColor(0, 0, 0));
         BaseFont bf = BaseFont.createFont("c:/windows/Fonts/msyh.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        smallFont = new Font(bf,7f);
+        smallFont = new Font(bf,8.5f);
+
+
+
     }
 
     /**
@@ -123,7 +133,8 @@ public class ContactPDFView implements BinaryExportView {
         {
             generateHeaders();
         }
-        tablePDF.endHeaders();
+       // tablePDF.endHeaders();
+        tablePDF.setHeaderRows(1);
         generateRows();
     }
 
@@ -138,21 +149,21 @@ public class ContactPDFView implements BinaryExportView {
             initTable();
 
             // Initialize the Document and register it with PdfWriter listener and the OutputStream
-            Document document = new Document(PageSize.A4.rotate(), 60, 60, 40, 40);
+            Document document = new Document(PageSize.LETTER.rotate(), 30, 30, 20, 20);
             document.addCreationDate();
 
-            HeaderFooter footer = new HeaderFooter(new Phrase(TagConstants.EMPTY_STRING, smallFont), true);
+         //   HeaderFooter footer = new HeaderFooter(new Phrase(TagConstants.EMPTY_STRING, smallFont), true);
 
 
-            footer.setBorder(Rectangle.NO_BORDER);
-            footer.setAlignment(Element.ALIGN_CENTER);
+          //  footer.setBorder(Rectangle.NO_BORDER);
+          //  footer.setAlignment(Element.ALIGN_CENTER);
             PdfWriter.getInstance(document, out);
 
             // Fill the virtual PDF table with the necessary data
             generatePDFTable();
             document.open();
             document=this.generateTitle(document);
-            document.setFooter(footer);
+           // document.setFooter(footer);
             document.add(this.tablePDF);
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();
@@ -170,17 +181,13 @@ public class ContactPDFView implements BinaryExportView {
 
     protected Document generateTitle(Document doc) throws Exception {
         String relativeWebPath = "src/main/webapp/images/cosllogo_small.jpg";
+        // String relativeWebPath = "webapps/contacts/images/cosllogo_small.jpg";
 
-        //String absoluteDiskPath = getServletContext().getRealPath(relativeWebPath);
 
         Image logo = Image.getInstance(relativeWebPath);
 
         logo.setAlignment(Image.ALIGN_LEFT);
         logo.scalePercent(50f);
-
-        Paragraph mailgroups = new Paragraph(12);
-        mailgroups.add(new Paragraph("Spanish Speaker: staffmx@cosl.mx", dirFont));
-        mailgroups.add(new Paragraph("Chinese Speaker: expats@cosl.mx", dirFont));
         Paragraph title = new Paragraph(12);
         addEmptyLine(title,1);
         title.setSpacingBefore(-15);
@@ -188,6 +195,7 @@ public class ContactPDFView implements BinaryExportView {
 
         title.add(new Paragraph("C.P. 24157, Cd. del Carmen, Campeche, México",dirFont));
         title.add(new Paragraph("Phone: +52 (938) 118 23 98  Fax:+52 (938) 131 4820",dirFont));
+        title.add(new Paragraph("Chinese Speaker: expats@cosl.mx     Spanish Speaker: staffmx@cosl.mx", dirFont));
         doc.add(logo);
         doc.add(title);
         return doc;
@@ -217,13 +225,13 @@ public class ContactPDFView implements BinaryExportView {
             {
                 columnHeader = StringUtils.capitalize(headerCell.getBeanPropertyName());
             }
-            Cell hdrCell;
-            if(colNum==1){
-                hdrCell = getCellCentered(columnHeader);
-            }
-            hdrCell = getCell(columnHeader);
+            PdfPCell hdrCell;
+           // if(colNum==1){
+            hdrCell = getCellCentered(columnHeader);
+           // }
+          //  hdrCell = getCell(columnHeader);
             hdrCell.setGrayFill(0.9f);
-            hdrCell.setHeader(true);
+           // hdrCell.setHeader(true);
             tablePDF.addCell(hdrCell);
            colNum++;
         }
@@ -258,13 +266,16 @@ public class ContactPDFView implements BinaryExportView {
                 Column column = columnIterator.nextColumn();
                 Object value = column.getValue(this.decorated);
                 String currentText = ObjectUtils.toString(value);
-                Cell cell;
+                PdfPCell cell;
 
                 if(rowNum==1){
                     if(totalRowSpan<1){
                         totalRowSpan=counts.get(rowBlock-1);
                         rowBlock=rowBlock+1;
-                        cell = getCellCentered(currentText);
+                        System.out.println(currentText);
+                        String texts[]=currentText.split("<br/>");
+                        System.out.println(texts[0]);
+                        cell = getCellCentered(texts[0]+"\n"+texts[1]);
                         cell.setRowspan(totalRowSpan);
 
                         tablePDF.addCell(cell);
@@ -272,7 +283,11 @@ public class ContactPDFView implements BinaryExportView {
                     }
 
                 }else{
-                    cell = getCell(currentText);
+                    if(rowNum==0||rowNum==4||rowNum==5||rowNum==6){
+                        cell = getCellCentered(currentText);
+                    }else{
+                        cell = getCell(currentText);
+                    }
                     tablePDF.addCell(cell);
                 }
 
@@ -302,7 +317,7 @@ public class ContactPDFView implements BinaryExportView {
                 Column column = columnIterator.nextColumn();
                 Object value = column.getValue(this.decorated);
                 String currentText = ObjectUtils.toString(value);
-                Cell cell=null;
+                PdfPCell cell=null;
 
                 if(rowNum==1){
                     if(toMatch.compareToIgnoreCase("")==0){
@@ -340,11 +355,12 @@ public class ContactPDFView implements BinaryExportView {
      * @return Cell
      * @throws BadElementException errors while generating content
      */
-    private Cell getCell(String value) throws BadElementException
+    private PdfPCell getCell(String value) throws BadElementException
     {
-        Cell cell = new Cell(new Chunk(StringUtils.trimToEmpty(value), smallFont));
+        PdfPCell cell = new PdfPCell(new Phrase(StringUtils.trimToEmpty(value), smallFont));
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        cell.setLeading(8);
+       // cell.setLeading(8);
+        cell.setPadding(2);
         return cell;
     }
 
@@ -354,12 +370,13 @@ public class ContactPDFView implements BinaryExportView {
      * @return Cell
      * @throws BadElementException errors while generating content
      */
-    private Cell getCellCentered(String value) throws BadElementException
+    private PdfPCell getCellCentered(String value) throws BadElementException
     {
-        Cell cell = new Cell(new Chunk(StringUtils.trimToEmpty(value), smallFont));
+        PdfPCell cell = new PdfPCell(new Phrase(StringUtils.trimToEmpty(value), smallFont));
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        cell.setLeading(8);
+        cell.setPadding(2);
+       // cell.setLeft(8);
         return cell;
     }
 

@@ -23,7 +23,7 @@
     </security:authorize>
     <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
 	<display:table name="personList"
-		class="table table-condensed table-bordered table-hover" requestURI=""
+		class="table table-condensed table-bordered table-hover table-striped" requestURI=""
 		id="personList" export="true" pagesize="200" >
         <display:column titleKey="person.id">
             <c:out value="${personList_rowNum}"/>

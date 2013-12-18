@@ -50,8 +50,9 @@ public class Department extends BaseObject {
 
     @Transient
     public String getFullName(){
-        return this.getNameCH()+" "+this.getNameES();
+        return this.getNameCH()+"<br/>"+this.getNameES();
     }
+
 	@Override
 	public String toString() {
 		return "Position [id=" + id + ", nameCH=" + nameCH + ", nameES="
