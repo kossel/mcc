@@ -100,14 +100,14 @@ public class ContactPDFView implements BinaryExportView {
         tablePDF.setWidthPercentage(100);
 
       //  tablePDF.setSpacing(0);
-        tablePDF.setSplitLate(false);
-        tablePDF.setSplitRows(true);
-        float[] columnWidths = new float[] {3f, 22f, 20f, 20f, 9f,19f,4f,9f};
+       // tablePDF.setSplitLate(false);
+      //  tablePDF.setSplitRows(true);
+        float[] columnWidths = new float[] {3f, 21f, 21f, 20f, 9f,19f,4f,9f};
         tablePDF.setWidths(columnWidths);
        // smallFont = FontFactory.getFont(FontFactory.HELVETICA, 7, Font.NORMAL, new Color(0, 0, 0));
         dirFont= FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new BaseColor(0, 0, 0));
         BaseFont bf = BaseFont.createFont("c:/windows/Fonts/msyh.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        smallFont = new Font(bf,8.5f);
+        smallFont = new Font(bf,8f);
 
 
 
@@ -189,13 +189,15 @@ public class ContactPDFView implements BinaryExportView {
         logo.setAlignment(Image.ALIGN_LEFT);
         logo.scalePercent(50f);
         Paragraph title = new Paragraph(12);
-        addEmptyLine(title,1);
-        title.setSpacingBefore(-15);
+       // addEmptyLine(title,1);
+        title.setSpacingBefore(-5);
         title.add(new Paragraph("Edificio de Oficinas TAKIN, Av. Isla de Tris # 28, Kilometro 5, Fraccionamiento San Miguel.", dirFont));
 
         title.add(new Paragraph("C.P. 24157, Cd. del Carmen, Campeche, México",dirFont));
         title.add(new Paragraph("Phone: +52 (938) 118 23 98  Fax:+52 (938) 131 4820",dirFont));
         title.add(new Paragraph("Chinese Speaker: expats@cosl.mx     Spanish Speaker: staffmx@cosl.mx", dirFont));
+        title.setSpacingAfter(5);
+        //addEmptyLine(title,0.5);
         doc.add(logo);
         doc.add(title);
         return doc;
@@ -272,9 +274,7 @@ public class ContactPDFView implements BinaryExportView {
                     if(totalRowSpan<1){
                         totalRowSpan=counts.get(rowBlock-1);
                         rowBlock=rowBlock+1;
-                        System.out.println(currentText);
                         String texts[]=currentText.split("<br/>");
-                        System.out.println(texts[0]);
                         cell = getCellCentered(texts[0]+"\n"+texts[1]);
                         cell.setRowspan(totalRowSpan);
 
