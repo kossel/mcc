@@ -11,7 +11,8 @@
 	<h2>
 		<fmt:message key='personList.heading' />
 	</h2>
-
+    <fmt:message key='opt.staffmx' />   <a href="mailto:staffmx@cosl.mx" target="_top">staffmx@cosl.mx</a> <br/>
+    <fmt:message key='opt.expats' />   <a href="mailto:expats@cosl.mx" target="_top">expats@cosl.mx</a><br/>
     <security:authorize ifAnyGranted="ROLE_ADMIN,ROLE_USER">
 	<div id="actions" class="form-actions">
 		<a class="btn btn-primary" href="<c:url value='personform'/>"> <i
@@ -19,8 +20,7 @@
 			class="btn" href="<c:url value='persons'/>"> <i class="icon-ok"></i>
 			<fmt:message key="button.done" /></a>
 	</div>
-        <fmt:message key='opt.staffmx' />   <a href="mailto:staffmx@cosl.mx" target="_top">staffmx@cosl.mx</a> <br/>
-        <fmt:message key='opt.expats' />   <a href="mailto:expats@cosl.mx" target="_top">expats@cosl.mx</a>
+
     </security:authorize>
     <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${opt.whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
 	<display:table name="personList"

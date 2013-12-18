@@ -3,7 +3,6 @@ package com.kossel.util;
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.BaseFont;
 
 import com.itextpdf.text.pdf.PdfPCell;
@@ -31,7 +30,6 @@ import org.displaytag.model.ColumnIterator;
 import org.displaytag.model.HeaderCell;
 import org.displaytag.model.Row;
 import org.displaytag.model.RowIterator;
-import org.displaytag.util.TagConstants;
 
 /**
  * Created with IntelliJ IDEA.
@@ -58,7 +56,7 @@ public class ContactPDFView implements BinaryExportView {
     private boolean header;
 
     /**
-     * decorate export?
+     * decorate export?    fd
      */
     private boolean decorated;
 
