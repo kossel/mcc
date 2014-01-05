@@ -5,6 +5,11 @@
 <meta name="menu" content="PersonMenu" />
     <style>
         .centerCellText{text-align:center !important;  vertical-align:middle !important;}
+        .filter-table .quick { margin-left: 0.5em; font-size: 0.8em; text-decoration: none; }
+        .fitler-table .quick:hover { text-decoration: underline; }
+        td.alt { background-color: #ffc; background-color: rgba(255, 255, 0, 0.2); }
+
+        tr.striped { background-color: #f0f8ff; }
     </style>
 </head>
 <div class="span12">
@@ -24,7 +29,7 @@
     </security:authorize>
     <fmt:message key="opt.changesNo" />: ${opt.changes} &nbsp<fmt:message key="opt.user" />: ${opt.whoLastEditPersons}&nbsp <fmt:message key="opt.time" />: ${opt.lastEditPersonsTime}
 	<display:table name="personList"
-		class="table table-condensed table-bordered table-hover table-striped" requestURI=""
+		class="table table-condensed table-bordered table-hover" requestURI=""
 		id="personList" export="true" pagesize="200" >
         <display:column titleKey="person.id" class="centerCellText"  headerClass="centerCellText">
             <c:out value="${personList_rowNum}"/>
@@ -57,42 +62,86 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            var stripeTable = function(table) { //stripe the table (jQuery selector)
+                table.find('tr').removeClass('striped').filter(':visible:even').addClass('striped');
+            };
 
-            $('#personList').each(function () {
+            $('#personList').filterTable({
+                callback: function(term, table) {
 
-                var dimension_cells = new Array();
-                var dimension_col = 2;
+                    table.find('tr').removeClass('striped').filter(':visible:even').addClass('striped');
+                    //splitRowspan();
+                   // rowspan();
 
-               // first_instance holds the first instance of identical td
-                var first_instance = null;
-                // iterate
-                // through rows
-                $(this).find('tr').each(function () {
+                }
+            });
+           rowspan();
+            stripeTable($('#personList'));
 
-                    // find the td of the correct column (determined by the dimension_col set above)
-                    var dimension_td = $(this).find('td:nth-child(' + dimension_col + ')');
 
-                    if (first_instance == null) {
-                        // must be the first row
-                        first_instance = dimension_td;
+            function splitRowspan (){
+                var currentrspan=0;
+                var txt;
+                $('#personList tr td:nth-child(2)').each(function(){
 
-                    } else if (dimension_td.text() == first_instance.text()) {
-                        // the current td is identical to the previous
-                        // remove the current td
-                        dimension_td.remove();
-                        // increment the rowspan attribute of the first instance
-                        if(typeof first_instance.attr('rowspan')== 'undefined'){
-                            first_instance.attr('rowspan', 1);
-                        }
-                            first_instance.attr('rowspan', parseInt(first_instance.attr('rowspan')) + 1);
-                    } else {
-                        // this cell is different from the last
-                        first_instance = dimension_td;
-                        first_instance.addClass('centerCellText');
+
+                    var rspan = $(this).attr("rowspan");
+                    //    alert(rspan + "   "+currentrspan);
+                    if(typeof rspan != "undefined" && rspan != currentrspan ){
+                        txt = $(this).html();
+                        currentrspan = rspan;
+
                     }
 
+                    if(typeof rspan == "undefined" && currentrspan>=1){
+                        $(this).before('<td>'+txt+'</td>');
+                    }
+                    currentrspan = currentrspan-1;
+                    $(this).removeAttr("rowspan");
+
+
                 });
-            });
+            }
+          //  $('#personList > tbody  > tr').each(function(row) { alert(row.html);});
+
+            function rowspan(){
+                $('#personList').each(function () {
+
+                    var dimension_cells = new Array();
+                    var dimension_col = 2;
+
+                    // first_instance holds the first instance of identical td
+                    var first_instance = null;
+                    // iterate
+                    // through rows
+                    $(this).find('tr').each(function () {
+
+                        // find the td of the correct column (determined by the dimension_col set above)
+                        var dimension_td = $(this).find('td:nth-child(' + dimension_col + ')');
+
+                        if (first_instance == null) {
+                            // must be the first row
+                            first_instance = dimension_td;
+
+                        } else if (dimension_td.text() == first_instance.text()) {
+                            // the current td is identical to the previous
+                            // remove the current td
+                            dimension_td.remove();
+                            // increment the rowspan attribute of the first instance
+                            if(typeof first_instance.attr('rowspan')== 'undefined'){
+                                first_instance.attr('rowspan', 1);
+                            }
+                            first_instance.attr('rowspan', parseInt(first_instance.attr('rowspan')) + 1);
+                        } else {
+                            // this cell is different from the last
+                            first_instance = dimension_td;
+                            first_instance.addClass('centerCellText');
+                        }
+
+                    });
+                });
+            }
+
 
 
 

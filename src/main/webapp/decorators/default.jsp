@@ -18,7 +18,7 @@
     <script type="text/javascript" src="<c:url value='/scripts/lib/bootstrap-2.2.1.min.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/lib/plugins/jquery.cookie.js'/>"></script>
     <script type="text/javascript" src="<c:url value='/scripts/script.js'/>"></script>
-    <script type="text/javascript" src="<c:url value='/scripts/lib/jquery.filtertable.min.js'/>"></script>
+    <script type="text/javascript" src="<c:url value='/scripts/lib/jquery.filtertable.js'/>"></script>
 </head>
 <body<decorator:getProperty property="body.id" writeEntireProperty="true"/><decorator:getProperty property="body.class" writeEntireProperty="true"/>>
     <c:set var="currentMenu" scope="request"><decorator:getProperty property="meta.menu"/></c:set>
